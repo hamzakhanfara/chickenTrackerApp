@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-error-container": "#93000a",
+                  "surface": "#f7fbf1",
+                  "secondary-fixed": "#ffdbcb",
+                  "surface-container-high": "#e6e9e0",
+                  "background": "#f7fbf1",
+                  "on-tertiary": "#ffffff",
+                  "on-primary": "#ffffff",
+                  "surface-container-lowest": "#ffffff",
+                  "tertiary-fixed-dim": "#ffb1c8",
+                  "on-secondary-container": "#562100",
+                  "surface-dim": "#d8dbd2",
+                  "surface-bright": "#f7fbf1",
+                  "surface-container-low": "#f2f5ec",
+                  "on-background": "#191d17",
+                  "error": "#ba1a1a",
+                  "error-container": "#ffdad6",
+                  "primary-fixed": "#acf4a4",
+                  "inverse-primary": "#91d78a",
+                  "primary-container": "#1b5e20",
+                  "on-secondary-fixed": "#341100",
+                  "inverse-surface": "#2d322c",
+                  "secondary-fixed-dim": "#ffb691",
+                  "secondary-container": "#fb6d00",
+                  "outline-variant": "#c0c9bb",
+                  "on-secondary-fixed-variant": "#793100",
+                  "on-secondary": "#ffffff",
+                  "secondary": "#9e4200",
+                  "primary": "#00450d",
+                  "on-tertiary-container": "#ffaec6",
+                  "surface-variant": "#e0e4db",
+                  "on-tertiary-fixed-variant": "#7a2949",
+                  "surface-container-highest": "#e0e4db",
+                  "inverse-on-surface": "#eff2e9",
+                  "outline": "#717a6d",
+                  "on-tertiary-fixed": "#3e001d",
+                  "on-surface": "#191d17",
+                  "on-primary-fixed": "#002203",
+                  "on-primary-fixed-variant": "#0c5216",
+                  "on-primary-container": "#90d689",
+                  "primary-fixed-dim": "#91d78a",
+                  "tertiary-fixed": "#ffd9e2",
+                  "on-error": "#ffffff",
+                  "tertiary": "#6b1d3d",
+                  "tertiary-container": "#883454",
+                  "surface-tint": "#2a6b2c",
+                  "on-surface-variant": "#41493e",
+                  "surface-container": "#ecefe6"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "xs": "4px",
+                  "xl": "32px",
+                  "sm": "12px",
+                  "base": "8px",
+                  "lg": "24px",
+                  "md": "16px",
+                  "touch-target-min": "48px"
+          },
+          "fontFamily": {
+                  "headline-md": ["Work Sans"],
+                  "label-bilingual": ["Work Sans"],
+                  "body-md": ["Work Sans"],
+                  "caption": ["Work Sans"],
+                  "headline-lg": ["Work Sans"],
+                  "body-lg": ["Work Sans"]
+          },
+          "fontSize": {
+                  "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                  "label-bilingual": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                  "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      font-family: 'Work Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-white border-b border-gray-200 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="Farmer Profile Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a smiling middle-aged farmer with a weathered face and straw hat, outdoors in warm evening sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjbpCOmFjXdAeWKb0pg8TNsOows0XjGj0plstYOd-Wms6wDugOI2V9HrmaqfWrYH0VO4cqPru9FNA4-lKgoyYrB-LYWS6-bzxRGBoE860px27-WZgoUHvuCB-eRSGikM6cIQ55OoZnJC2QwDsV_0UBJTSusRtPE1fpSQmSyxypYQ0FtCjz529WCe50kdZQcI6dWieejkE9yL3IBLhjLEh_Wvq0rWS4NUw0DLA7sFxAY-Xwnw_XhLhvazMK_owuvIKrf2MtWN2ZlTY"/>
+</div>
+<h1 class="text-xl font-bold text-green-900 font-headline-md">PoultryTrack / بولتري تراك</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-green-900">notifications</span>
+</button>
+</header>
+<main class="pt-20 pb-24 px-4 max-w-[375px] mx-auto">
+<!-- Breadcrumb / Context -->
+<div class="flex items-center gap-2 mb-md">
+<span class="material-symbols-outlined text-primary text-body-md">arrow_back</span>
+<span class="font-label-bilingual text-label-bilingual text-primary">Lot Details / تفاصيل الدفعة</span>
+</div>
+<!-- Main Detail Card -->
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden mb-md">
+<!-- Card Header -->
+<div class="p-md flex justify-between items-start border-b border-gray-50">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Lot 04 / دفعة 04</h2>
+<p class="font-caption text-caption text-outline">Started: 12 Oct 2023 / بدأ في 12 أكتوبر</p>
+</div>
+<div class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full font-label-bilingual text-caption flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+          Active / نشط
+        </div>
+</div>
+<!-- Core Progress Area -->
+<div class="p-md bg-surface-container-low">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-bilingual text-label-bilingual text-on-surface">Cycle Progress / تقدم الدورة</span>
+<span class="font-headline-md text-headline-md text-primary">75%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-3 mb-sm overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 75%"></div>
+</div>
+<div class="flex justify-between font-caption text-caption text-outline">
+<span>Day 32 / يوم ٣٢</span>
+<span>10 Days Left / ١٠ أيام متبقية</span>
+</div>
+</div>
+<!-- Vital Stats Bento Grid -->
+<div class="grid grid-cols-2 gap-px bg-gray-100">
+<div class="bg-white p-md flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary-container mb-xs">pets</span>
+<span class="font-caption text-caption text-outline">Alive / الأحياء</span>
+<span class="font-headline-md text-headline-md text-on-surface">4,850</span>
+</div>
+<div class="bg-white p-md flex flex-col items-center">
+<span class="material-symbols-outlined text-error mb-xs">skull</span>
+<span class="font-caption text-caption text-outline">Mortality / الوفيات</span>
+<span class="font-headline-md text-headline-md text-error">1.2%</span>
+</div>
+<div class="bg-white p-md flex flex-col items-center border-t border-gray-100">
+<span class="material-symbols-outlined text-primary-container mb-xs">equalizer</span>
+<span class="font-caption text-caption text-outline">Current IC / دليل الاستهلاك</span>
+<span class="font-headline-md text-headline-md text-on-surface">1.45</span>
+</div>
+<div class="bg-white p-md flex flex-col items-center border-t border-gray-100">
+<span class="material-symbols-outlined text-primary-container mb-xs">timer</span>
+<span class="font-caption text-caption text-outline">Age / العمر</span>
+<span class="font-headline-md text-headline-md text-on-surface">32 Days</span>
+</div>
+</div>
+</div>
+<!-- Alert / Task Notification Card -->
+<div class="bg-white rounded-xl shadow-sm border-l-4 border-secondary-container p-md flex gap-md mb-md">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">priority_high</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-label-bilingual text-label-bilingual font-bold text-on-surface">Vaccination Alert / تنبيه التلقيح</h3>
+<span class="font-caption text-caption text-outline">2h ago</span>
+</div>
+<p class="font-caption text-caption text-outline-variant mt-xs">Lot 04 is due for Gumboro vaccine booster today. / يجب إعطاء لقاح الجمبورو لدفعة 04 اليوم.</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-sm">
+<button class="bg-primary-container text-white h-touch-target-min rounded-xl font-label-bilingual flex items-center justify-center gap-md shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+        Add Daily Log / إضافة سجل يومي
+      </button>
+<button class="bg-secondary-container text-white h-touch-target-min rounded-xl font-label-bilingual flex items-center justify-center gap-md shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined">description</span>
+        Generate Report / إصدار تقرير
+      </button>
+</div>
+<!-- History Preview Section -->
+<div class="mt-lg">
+<h3 class="font-label-bilingual text-label-bilingual font-bold text-primary mb-sm">Recent Activity / النشاط الأخير</h3>
+<div class="space-y-sm">
+<div class="flex items-center gap-md p-sm bg-white rounded-lg border border-gray-50 shadow-sm">
+<span class="material-symbols-outlined text-primary-container">inventory_2</span>
+<div class="flex-1">
+<p class="font-label-bilingual text-caption text-on-surface">Feed Delivery / تسليم العلف</p>
+<p class="font-caption text-[10px] text-outline">Yesterday at 14:30</p>
+</div>
+<span class="font-label-bilingual text-caption font-bold text-primary">+500 kg</span>
+</div>
+<div class="flex items-center gap-md p-sm bg-white rounded-lg border border-gray-50 shadow-sm">
+<span class="material-symbols-outlined text-error">remove_circle_outline</span>
+<div class="flex-1">
+<p class="font-label-bilingual text-caption text-on-surface">Mortality Log / سجل الوفيات</p>
+<p class="font-caption text-[10px] text-outline">Yesterday at 08:15</p>
+</div>
+<span class="font-label-bilingual text-caption font-bold text-error">-2</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-white border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-green-700 transition-transform duration-150 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold mt-1">Home / الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-800 bg-green-50 rounded-xl px-3 py-1 transition-transform duration-150 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-['Work_Sans'] text-[10px] font-bold mt-1">Lots / دفعات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-green-700 transition-transform duration-150 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold mt-1">Calendar / التقويم</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-green-700 transition-transform duration-150 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold mt-1">Reports / التقارير</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,263 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum UserRole {
+  farmer
+  admin
+}
+
+enum BuildingType {
+  open
+  semi_closed
+  closed
+}
+
+enum LotBreed {
+  ROSS_308
+  COBB_500
+  HUBBARD
+  OTHER
+}
+
+enum LotStatus {
+  active
+  closed
+  cancelled
+}
+
+enum AdministrationRoute {
+  water
+  spray
+  ocular
+  injection
+  other
+}
+
+enum VaccinePlanStatus {
+  planned
+  done
+  missed
+  cancelled
+}
+
+enum ExpenseEntryMode {
+  PER_CHICK
+  TOTAL
+}
+
+// ---------------------------------------------------------------------------
+// Models
+// ---------------------------------------------------------------------------
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  phone     String?
+  role      UserRole @default(farmer)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  farms         Farm[]
+  vaccineEvents VaccineEvent[]
+
+  @@map("users")
+}
+
+model Farm {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  location  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coops Coop[]
+
+  @@index([userId])
+  @@map("farms")
+}
+
+model Coop {
+  id           String       @id @default(uuid())
+  farmId       String
+  name         String
+  buildingType BuildingType @default(open)
+  capacity     Int?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  farm Farm  @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  lots Lot[]
+
+  @@index([farmId])
+  @@map("coops")
+}
+
+model Lot {
+  id              String    @id @default(uuid())
+  coopId          String
+  code            String    @unique
+  breed           LotBreed  @default(OTHER)
+  status          LotStatus @default(active)
+  entryDate       DateTime
+  initialCount    Int
+  initialWeightKg Decimal?
+  entryPricePerKg Decimal?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  coop         Coop          @relation(fields: [coopId], references: [id], onDelete: Cascade)
+  dailyEntries DailyEntry[]
+  vaccinePlans VaccinePlan[]
+  treatments   Treatment[]
+  closure      LotClosure?
+  lotExpense   LotExpense?
+
+  @@index([coopId])
+  @@index([status])
+  @@map("lots")
+}
+
+model DailyEntry {
+  id              String   @id @default(uuid())
+  lotId           String
+  entryDate       DateTime @db.Date
+  ageDay          Int?
+  mortalityCount  Int      @default(0)
+  feedConsumedKg  Decimal  @default(0)
+  avgWeightGrams  Decimal?
+  waterLiters     Decimal?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  lot Lot @relation(fields: [lotId], references: [id], onDelete: Cascade)
+
+  @@unique([lotId, entryDate])
+  @@index([lotId])
+  @@index([entryDate])
+  @@map("daily_entries")
+}
+
+model VaccinePlan {
+  id                  String            @id @default(uuid())
+  lotId               String
+  vaccineName         String
+  scheduledDay        Int
+  scheduledDate       DateTime          @db.Date
+  administrationRoute AdministrationRoute
+  status              VaccinePlanStatus @default(planned)
+  notes               String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  lot   Lot           @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  event VaccineEvent?
+
+  @@index([lotId])
+  @@map("vaccine_plans")
+}
+
+model VaccineEvent {
+  id            String   @id @default(uuid())
+  vaccinePlanId String   @unique
+  createdById   String?
+  executedDate  DateTime @db.Date
+  dosesGiven    Int?
+  batchNumber   String?
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  vaccinePlan VaccinePlan @relation(fields: [vaccinePlanId], references: [id], onDelete: Cascade)
+  createdBy   User?       @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@map("vaccine_events")
+}
+
+model Treatment {
+  id          String   @id @default(uuid())
+  lotId       String
+  productName String
+  reason      String?
+  startDate   DateTime @db.Date
+  endDate     DateTime? @db.Date
+  dosage      String?
+  costMad     Decimal?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  lot Lot @relation(fields: [lotId], references: [id], onDelete: Cascade)
+
+  @@index([lotId])
+  @@map("treatments")
+}
+
+model LotClosure {
+  id               String   @id @default(uuid())
+  lotId            String   @unique
+  closureDate      DateTime @db.Date
+  totalWeightKg    Decimal?
+  totalSold        Int?
+  avgSalePricePerKgMad Decimal?
+  totalRevenueMad  Decimal?
+  totalFeedCostMad Decimal?
+  totalOtherCosts  Decimal?
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  lot Lot @relation(fields: [lotId], references: [id], onDelete: Cascade)
+
+  @@map("lot_closures")
+}
+
+model LotExpense {
+  id                  String           @id @default(uuid())
+  lotId               String           @unique
+  entryMode           ExpenseEntryMode @default(TOTAL)
+  chickPrice          Decimal?
+  vaccinationExpense  Decimal?
+  coopExpense         Decimal?
+  farmerExpense       Decimal?
+  gasExpense          Decimal?
+  waterExpense        Decimal?
+  feedExpense         Decimal?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  lot                 Lot                    @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  additionalExpenses  LotAdditionalExpense[]
+
+  @@map("lot_expenses")
+}
+
+model LotAdditionalExpense {
+  id           String     @id @default(uuid())
+  lotExpenseId String
+  label        String
+  amount       Decimal
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  lotExpense   LotExpense @relation(fields: [lotExpenseId], references: [id], onDelete: Cascade)
+
+  @@index([lotExpenseId])
+  @@map("lot_additional_expenses")
+}

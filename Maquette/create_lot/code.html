@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c0c9bb",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e4db",
+                        "surface-container": "#ecefe6",
+                        "surface-bright": "#f7fbf1",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#7a2949",
+                        "primary-fixed": "#acf4a4",
+                        "inverse-on-surface": "#eff2e9",
+                        "secondary-fixed": "#ffdbcb",
+                        "on-background": "#191d17",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-dim": "#d8dbd2",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d322c",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#41493e",
+                        "secondary-fixed-dim": "#ffb691",
+                        "secondary-container": "#fb6d00",
+                        "on-tertiary-fixed": "#3e001d",
+                        "on-secondary-fixed-variant": "#793100",
+                        "surface-container-high": "#e6e9e0",
+                        "on-tertiary-container": "#ffaec6",
+                        "surface-tint": "#2a6b2c",
+                        "inverse-primary": "#91d78a",
+                        "primary": "#00450d",
+                        "tertiary": "#6b1d3d",
+                        "outline": "#717a6d",
+                        "tertiary-fixed-dim": "#ffb1c8",
+                        "surface-container-low": "#f2f5ec",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e4db",
+                        "background": "#f7fbf1",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191d17",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-secondary-fixed": "#341100",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-container": "#883454",
+                        "surface": "#f7fbf1",
+                        "secondary": "#9e4200",
+                        "on-secondary-container": "#562100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-bilingual": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "caption": ["Work Sans"],
+                        "headline-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "label-bilingual": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #f7fbf1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-4 h-16 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 shadow-sm z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional agricultural cooperative logo featuring a stylized green tractor in a circular emblem. The design is modern and minimalist, utilizing deep forest green and vibrant lime accents on a crisp white background. The lighting is bright and even, conveying a sense of corporate reliability and growth in a high-tech farming environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnEYu1xpIp9ihG_K8qKpA5weN1tr594VhU6ZXAsOkrRtKxqZncgjIrGKO-cHP46Iwk5xmH7-0VNvIb4cQohw7QMgMB1u0mztg6NaF_vTMdi6iD99QRzfJO1m1ErCN-19xviZnwHBqRQr9IDogVbtwsHhoqBB84atEG0LP5wqkmvo5jRGDUKyHI3T6GJR8xn8kR8D6cvpNbTcawRrBk3mcMgh8-rHYaBuSKcdVzp4cAmniaOX64wDxR9z63YFCb54qd1e4HIs9Ebjg"/>
+</div>
+<h1 class="text-xl font-bold text-[#1B5E20] dark:text-green-50 font-['Work_Sans']">AgriPoultry / تدبير الدواجن</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-4 py-8 mb-20">
+<!-- Breadcrumb / Back Navigation -->
+<div class="flex items-center gap-2 mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined text-xl" data-icon="arrow_back">arrow_back</span>
+<span class="font-label-bilingual text-label-bilingual">Back to Dashboard / العودة إلى لوحة القيادة</span>
+</div>
+<!-- Header Section -->
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Nouveau Lot / دورة جديدة</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Configuration de la nouvelle période de production / إعداد فترة الإنتاج الجديدة</p>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-outline-variant/30">
+<form class="space-y-6">
+<!-- Lot Code -->
+<div class="space-y-2">
+<label class="flex justify-between font-label-bilingual text-label-bilingual text-on-surface-variant">
+<span>Code du Lot / رمز الدفعة</span>
+<span class="text-primary font-bold">*</span>
+</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white font-body-md text-body-md" placeholder="e.g. LOT-2024-001" type="text"/>
+</div>
+<!-- Breed / Souche -->
+<div class="space-y-2">
+<label class="flex justify-between font-label-bilingual text-label-bilingual text-on-surface-variant">
+<span>Breed (Souche) / السلالة</span>
+<span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-12 px-4 rounded-lg border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white appearance-none font-body-md text-body-md">
+<option value="">Select breed / اختر السلالة</option>
+<option value="cobb500">Cobb 500</option>
+<option value="ross308">Ross 308</option>
+<option value="hubbard">Hubbard</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Grid Row for Date and Count -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Start Date -->
+<div class="space-y-2">
+<label class="flex justify-between font-label-bilingual text-label-bilingual text-on-surface-variant">
+<span>Start Date / تاريخ البدء</span>
+<span class="text-primary font-bold">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-12 px-4 rounded-lg border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white font-body-md text-body-md" type="date"/>
+</div>
+</div>
+<!-- Initial Bird Count -->
+<div class="space-y-2">
+<label class="flex justify-between font-label-bilingual text-label-bilingual text-on-surface-variant">
+<span>Initial Bird Count / عدد الطيور الأولي</span>
+<span class="text-primary font-bold">*</span>
+</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white font-body-md text-body-md" placeholder="0" type="number"/>
+</div>
+</div>
+<!-- Optional Notes -->
+<div class="space-y-2">
+<label class="flex justify-between font-label-bilingual text-label-bilingual text-on-surface-variant">
+<span>Optional Notes / ملاحظات اختيارية</span>
+</label>
+<textarea class="w-full p-4 rounded-lg border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white font-body-md text-body-md" placeholder="Additional details... / تفاصيل إضافية..." rows="3"></textarea>
+</div>
+<!-- Summary Info (Visual Decor) -->
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-secondary flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary" data-icon="info" data-weight="fill" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<p class="font-label-bilingual text-label-bilingual text-on-secondary-container">Note / ملاحظة</p>
+<p class="font-caption text-caption text-on-surface-variant">Verify all data before launching. Once production starts, the initial count is locked. / تحقق من جميع البيانات قبل البدء. بمجرد بدء الإنتاج، يتم قفل العدد الأولي.</p>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full h-14 bg-secondary-container text-white rounded-lg font-label-bilingual text-body-lg shadow-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3" type="submit">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                    Lancer la production / بدء الإنتاج
+                </button>
+</form>
+</div>
+<!-- Visual Image Anchor -->
+<div class="mt-8 rounded-xl overflow-hidden aspect-video relative group">
+<img class="w-full h-full object-cover" data-alt="A wide-angle interior shot of a pristine, modern poultry coop featuring advanced climate control systems and clean automated feeding lines. The space is filled with soft, warm golden sunlight streaming through high vents, creating an atmosphere of growth and healthy farming. The aesthetic is clean and industrial-corporate, with a color palette dominated by white, soft grays, and accents of forest green, echoing a sophisticated data-driven agricultural environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHThdTGDIBB-bUQRce5XvfHa2SUllI4CrYVOyt490jLhX0UVDGerRcCYGKN-zgM59rCeEeXNnz8SYPCdc4aGoRq2BdLU2_xE0ZMlhs9hChFZBYEzZRZlENSDt0JvRb0TwyfbbPGr3s1Xvpmr0BTjsGu1Sf8fAkyF-M_0kOai1RyC3wSY4s9pB0a8DiLqiahXgQKNrWe_Q1EjhfxO4sozvabM51pEgOj5c5NklVnBQvZ1xjY34zg2dzz3cQOAwSczk2I3yjvIfz4tk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
+<span class="text-white font-headline-md text-headline-md">Environnement Contrôlé / بيئة محكومة</span>
+<p class="text-white/80 font-caption text-caption">Optimized for maximum yield and animal welfare. / محسن لأقصى قدر من الإنتاج ورفاهية الحيوان.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-2 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] z-50">
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 transition-transform duration-150 active:scale-90 hover:text-[#FF6F00] dark:hover:text-orange-400" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Home / الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1B5E20] dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-lg py-1 px-3 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Work_Sans'] text-[10px] font-bold leading-tight text-center">Lots / المجموعات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 transition-transform duration-150 active:scale-90 hover:text-[#FF6F00] dark:hover:text-orange-400" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Stats / إحصائيات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 transition-transform duration-150 active:scale-90 hover:text-[#FF6F00] dark:hover:text-orange-400" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Profile / الحساب</span>
+</a>
+</nav>
+</body></html>

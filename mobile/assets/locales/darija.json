@@ -1,0 +1,23 @@
+{
+  "welcome": "مرحبا",
+  "auth": {
+    "login": "دخل للحساب",
+    "register": "خلق حساب",
+    "email": "الإيمايل",
+    "password": "كلمة السر",
+    "confirmPassword": "أكد كلمة السر",
+    "loginButton": "دخل",
+    "registerButton": "خلق حساب",
+    "haveAccount": "عندك حساب؟ دخل هنا",
+    "noAccount": "ما عندكش حساب؟ خلق واحد",
+    "passwordMismatch": "الكلمات ما تطابقوش",
+    "enterPhone": "دخل رقم تليفونك",
+    "sendCode": "بعث الكود",
+    "enterOtp": "دخل الكود لي وصلك",
+    "resendCode": "بعث الكود تاني",
+    "setupPin": "خلق كود PIN ديالك",
+    "confirmPin": "أكد كود PIN ديالك",
+    "pinMismatch": "الكودات ما تطابقوش",
+    "invalidOtp": "كود خطا أو سقطت صلاحيته"
+  }
+}

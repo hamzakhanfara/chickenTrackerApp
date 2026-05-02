@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c0c9bb",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e4db",
+                        "surface-container": "#ecefe6",
+                        "surface-bright": "#f7fbf1",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#7a2949",
+                        "primary-fixed": "#acf4a4",
+                        "inverse-on-surface": "#eff2e9",
+                        "secondary-fixed": "#ffdbcb",
+                        "on-background": "#191d17",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-dim": "#d8dbd2",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d322c",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#41493e",
+                        "secondary-fixed-dim": "#ffb691",
+                        "secondary-container": "#fb6d00",
+                        "on-tertiary-fixed": "#3e001d",
+                        "on-secondary-fixed-variant": "#793100",
+                        "surface-container-high": "#e6e9e0",
+                        "on-tertiary-container": "#ffaec6",
+                        "surface-tint": "#2a6b2c",
+                        "inverse-primary": "#91d78a",
+                        "primary": "#00450d",
+                        "tertiary": "#6b1d3d",
+                        "outline": "#717a6d",
+                        "tertiary-fixed-dim": "#ffb1c8",
+                        "surface-container-low": "#f2f5ec",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e4db",
+                        "background": "#f7fbf1",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191d17",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-secondary-fixed": "#341100",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-container": "#883454",
+                        "surface": "#f7fbf1",
+                        "secondary": "#9e4200",
+                        "on-secondary-container": "#562100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-bilingual": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "caption": ["Work Sans"],
+                        "headline-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "label-bilingual": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-4 h-16 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 shadow-sm z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional circular logo for an agricultural cooperative called Farm Coop. The logo features a minimalist green sprout symbol inside a clean white circle, against a background of dark emerald green. The lighting is soft and studio-quality, emphasizing a modern corporate agricultural brand identity with a focus on growth and sustainability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3deznCslKZ65Pq1gcnAIhJvtctZxyNxuKcLVNmI-lCd8MNGUZ77N1rh5kmvg7tUwgm8Xh-WFmxwBHRjM3H8gVIXUtt6DON1HaTjQ0CPG26kIm6ELdakEMuLWhgqbJ0v9ulcx-m8GQXw8ax-gIlyD17D1njTtnifl3cmafEw4JH72jk3InlquMHckPnYP3vxU3evvPlPdnpVonRfppew4KZg_8x2F0SJcD9TX1a4CGBf_EuGiunR2dWMVAW3Pvas9VwltyjLGiBfs"/>
+</div>
+<div class="flex flex-col">
+<span class="font-['Work_Sans'] text-base font-semibold text-[#1B5E20] dark:text-green-400">Farm Alpha &gt; Coop A1</span>
+<span class="font-['Work_Sans'] text-xs font-medium text-gray-500 text-right" dir="rtl">مزرعة ألفا &gt; عنبر أ1</span>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200 active:opacity-70">
+<span class="material-symbols-outlined text-[#1B5E20] dark:text-green-400" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="flex-1 p-4 pb-32 max-w-2xl mx-auto w-full">
+<!-- Breadcrumb / Secondary Header -->
+<div class="flex justify-between items-center mb-6">
+<div>
+<h1 class="font-headline-lg text-primary text-2xl">Lots / الدورات</h1>
+<p class="text-on-surface-variant text-caption font-caption">Management of production cycles / تسيير دورات الإنتاج</p>
+</div>
+<div class="w-12 h-12 bg-surface-container-high rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="grid_view">grid_view</span>
+</div>
+</div>
+<!-- Lot Cards Stack -->
+<div class="space-y-4">
+<!-- Card 1: Active -->
+<div class="bg-white border border-outline-variant rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-4 transition-colors active:bg-gray-50">
+<div class="flex justify-between items-start mb-3">
+<div class="flex flex-col">
+<span class="font-bold text-primary-container text-lg">L-2023-10</span>
+<span class="text-caption font-caption text-on-surface-variant">Ross 308 / روس 308</span>
+</div>
+<div class="bg-[#e8f5e9] text-[#1B5E20] px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="w-2 h-2 bg-[#1B5E20] rounded-full"></span>
+                        Active / نشط
+                    </div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-y border-outline-variant/30 py-3 mb-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="calendar_today">calendar_today</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider">Start / البدء</span>
+<span class="text-sm font-medium">12 Oct 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="numbers">numbers</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider">Initial / العدد</span>
+<span class="text-sm font-medium">4800 birds</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container font-bold">
+                            J+32
+                        </div>
+<span class="text-sm font-medium text-on-surface-variant">Day 32 / اليوم 32</span>
+</div>
+<button class="flex items-center text-primary font-semibold text-sm gap-1">
+                        View / عرض <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Closed -->
+<div class="bg-white border border-outline-variant rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-4 opacity-80 transition-colors active:bg-gray-50">
+<div class="flex justify-between items-start mb-3">
+<div class="flex flex-col">
+<span class="font-bold text-outline text-lg">L-2023-09</span>
+<span class="text-caption font-caption text-on-surface-variant">Ross 308 / روس 308</span>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                        Closed / مغلق
+                    </div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-y border-outline-variant/30 py-3 mb-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="calendar_today">calendar_today</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider">Start / البدء</span>
+<span class="text-sm font-medium text-on-surface-variant">01 Aug 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="numbers">numbers</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider">Initial / العدد</span>
+<span class="text-sm font-medium text-on-surface-variant">5000 birds</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold">
+                            End
+                        </div>
+<span class="text-sm font-medium text-on-surface-variant">Cycle Finished / انتهت</span>
+</div>
+<button class="flex items-center text-outline font-semibold text-sm gap-1">
+                        History / الأرشيف <span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Active Alternative -->
+<div class="bg-white border border-outline-variant rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-4 transition-colors active:bg-gray-50">
+<div class="flex justify-between items-start mb-3">
+<div class="flex flex-col">
+<span class="font-bold text-primary-container text-lg">L-2023-11</span>
+<span class="text-caption font-caption text-on-surface-variant">Cobb 500 / كوب 500</span>
+</div>
+<div class="bg-[#e8f5e9] text-[#1B5E20] px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="w-2 h-2 bg-[#1B5E20] rounded-full"></span>
+                        Active / نشط
+                    </div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-y border-outline-variant/30 py-3 mb-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="calendar_today">calendar_today</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider">Start / البدء</span>
+<span class="text-sm font-medium">05 Nov 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="numbers">numbers</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase tracking-wider">Initial / العدد</span>
+<span class="text-sm font-medium">4500 birds</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container font-bold">
+                            J+10
+                        </div>
+<span class="text-sm font-medium text-on-surface-variant">Day 10 / اليوم 10</span>
+</div>
+<button class="flex items-center text-primary font-semibold text-sm gap-1">
+                        View / عرض <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 bg-secondary-container text-white shadow-lg h-14 px-6 rounded-full flex items-center gap-3 z-40 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-bold text-sm">Créer un lot / إنشاء دورة</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-2 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] z-50">
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 hover:text-[#FF6F00] dark:hover:text-orange-400 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Home / الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1B5E20] dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-lg py-1 px-3 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Lots / المجموعات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 hover:text-[#FF6F00] dark:hover:text-orange-400 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Stats / إحصائيات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 hover:text-[#FF6F00] dark:hover:text-orange-400 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Profile / الحساب</span>
+</a>
+</nav>
+</body></html>

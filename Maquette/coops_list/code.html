@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c0c9bb",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#1b5e20",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e0e4db",
+                    "surface-container": "#ecefe6",
+                    "surface-bright": "#f7fbf1",
+                    "on-primary-container": "#90d689",
+                    "on-tertiary-fixed-variant": "#7a2949",
+                    "primary-fixed": "#acf4a4",
+                    "inverse-on-surface": "#eff2e9",
+                    "secondary-fixed": "#ffdbcb",
+                    "on-background": "#191d17",
+                    "on-primary-fixed-variant": "#0c5216",
+                    "surface-dim": "#d8dbd2",
+                    "tertiary-fixed": "#ffd9e2",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2d322c",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#41493e",
+                    "secondary-fixed-dim": "#ffb691",
+                    "secondary-container": "#fb6d00",
+                    "on-tertiary-fixed": "#3e001d",
+                    "on-secondary-fixed-variant": "#793100",
+                    "surface-container-high": "#e6e9e0",
+                    "on-tertiary-container": "#ffaec6",
+                    "surface-tint": "#2a6b2c",
+                    "inverse-primary": "#91d78a",
+                    "primary": "#00450d",
+                    "tertiary": "#6b1d3d",
+                    "outline": "#717a6d",
+                    "tertiary-fixed-dim": "#ffb1c8",
+                    "surface-container-low": "#f2f5ec",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#e0e4db",
+                    "background": "#f7fbf1",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#191d17",
+                    "primary-fixed-dim": "#91d78a",
+                    "on-secondary-fixed": "#341100",
+                    "on-primary-fixed": "#002203",
+                    "tertiary-container": "#883454",
+                    "surface": "#f7fbf1",
+                    "secondary": "#9e4200",
+                    "on-secondary-container": "#562100"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "touch-target-min": "48px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "label-bilingual": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "headline-lg": ["Work Sans"],
+                    "caption": ["Work Sans"],
+                    "headline-md": ["Work Sans"]
+            },
+            "fontSize": {
+                    "label-bilingual": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #f7fbf1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-4 h-16 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 shadow-sm z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="Farm Logo" class="w-full h-full object-cover" data-alt="A minimalist professional logo for an agricultural company featuring stylized green wheat stalks and a modern sun icon. The logo is clean and corporate, set against a deep forest green background that conveys stability, growth, and trust. The overall aesthetic is high-end and optimized for a light mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAslxjnkPieVJKLDt08pmAPs18RR37qkn8pImCvZBz6gCzI7dTneDhyT6Z9LtyukTf_IsGHOCIzWG2MsqFuklNALo2QbjIHGJ4T5B7Rl3TCOpS8YeJaKZsql5-6e3-MA9rAb4CC9D_pTW_elcE0yvYUoeQxCInGDdKM53v3Kd6KlXLnB36v3-hXi_QImnqoeDoTTiDJIYSzOtu1KdiyaJWlz8lIdANQozMcgIfpX7oKYJ1Dj3p_uvAvvKWj3rrw6OVZStonPPQDWdQ"/>
+</div>
+<h1 class="text-xl font-bold text-[#1B5E20] dark:text-green-50">AgriPoultry / تدبير الدواجن</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200 active:opacity-70">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pb-32 px-4 pt-6 max-w-3xl mx-auto">
+<!-- Section Header -->
+<div class="mb-8 flex flex-col gap-1">
+<p class="font-label-bilingual text-label-bilingual text-primary">Farm Alpha / مزرعة ألفا</p>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Poulaillers / العنابر</h2>
+</div>
+<!-- Coops Bento-ish Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-[#E0E0E0] p-5 flex flex-col gap-4 hover:shadow-md transition-shadow duration-200 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">Coop A1 / عنبر أ1</span>
+<span class="font-caption text-caption text-outline">ID: 001-ALPHA</span>
+</div>
+<span class="bg-green-50 text-[#1B5E20] px-3 py-1 rounded-full font-label-bilingual text-caption border border-green-100">Active / نشط</span>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-2">
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="material-symbols-outlined text-primary text-sm mb-1" data-icon="groups">groups</span>
+<span class="font-caption text-caption text-on-surface-variant">Capacity / السعة</span>
+<span class="font-label-bilingual text-label-bilingual text-on-surface">5000 birds / طائر</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col border-l-4 border-secondary-container">
+<span class="material-symbols-outlined text-secondary text-sm mb-1" data-icon="pending_actions" data-weight="fill" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+<span class="font-caption text-caption text-on-surface-variant">Active Lots / دورات</span>
+<span class="font-label-bilingual text-label-bilingual text-on-surface">1 Lot / دورة نشطة</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+<span class="material-symbols-outlined text-primary text-xs" data-icon="analytics">analytics</span>
+<span class="font-caption text-caption text-primary">View detailed metrics / عرض المقاييس</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-[#E0E0E0] p-5 flex flex-col gap-4 hover:shadow-md transition-shadow duration-200 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">Coop A2 / عنبر أ2</span>
+<span class="font-caption text-caption text-outline">ID: 002-ALPHA</span>
+</div>
+<span class="bg-green-50 text-[#1B5E20] px-3 py-1 rounded-full font-label-bilingual text-caption border border-green-100">Active / نشط</span>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-2">
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="material-symbols-outlined text-primary text-sm mb-1" data-icon="groups">groups</span>
+<span class="font-caption text-caption text-on-surface-variant">Capacity / السعة</span>
+<span class="font-label-bilingual text-label-bilingual text-on-surface">5000 birds / طائر</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col border-l-4 border-secondary-container">
+<span class="material-symbols-outlined text-secondary text-sm mb-1" data-icon="pending_actions" data-weight="fill" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+<span class="font-caption text-caption text-on-surface-variant">Active Lots / دورات</span>
+<span class="font-label-bilingual text-label-bilingual text-on-surface">1 Lot / دورة نشطة</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+<span class="material-symbols-outlined text-primary text-xs" data-icon="analytics">analytics</span>
+<span class="font-caption text-caption text-primary">View detailed metrics / عرض المقاييس</span>
+</div>
+</div>
+<!-- Card 3 (Empty State/Inactive Example) -->
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-[#E0E0E0] p-5 flex flex-col gap-4 opacity-80 hover:opacity-100 transition-all duration-200 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">Coop B1 / عنبر ب1</span>
+<span class="font-caption text-caption text-outline">ID: 003-ALPHA</span>
+</div>
+<span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full font-label-bilingual text-caption border border-gray-200">Inactive / غير نشط</span>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-2">
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="material-symbols-outlined text-gray-400 text-sm mb-1" data-icon="groups">groups</span>
+<span class="font-caption text-caption text-on-surface-variant">Capacity / السعة</span>
+<span class="font-label-bilingual text-label-bilingual text-on-surface">3500 birds / طائر</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="material-symbols-outlined text-gray-400 text-sm mb-1" data-icon="pending_actions">pending_actions</span>
+<span class="font-caption text-caption text-on-surface-variant">Active Lots / دورات</span>
+<span class="font-label-bilingual text-label-bilingual text-on-surface">0 Lot / دورة</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-gray-100">
+<span class="material-symbols-outlined text-gray-400 text-xs" data-icon="add_circle">add_circle</span>
+<span class="font-caption text-caption text-gray-500">Start new lot / ابدأ دورة جديدة</span>
+</div>
+</div>
+</div>
+<!-- WhatsApp-style Notification Feed Mockup -->
+<div class="mt-12 mb-8">
+<h3 class="font-headline-md text-headline-md text-on-background mb-4">Recent Alerts / تنبيهات حديثة</h3>
+<div class="flex flex-col gap-3">
+<div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-secondary-container flex gap-4 items-start cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="thermometer_loss">thermometer_loss</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center">
+<span class="font-label-bilingual text-label-bilingual font-bold text-on-surface">Temp Alert / تنبيه حرارة</span>
+<span class="font-caption text-caption text-outline">10:45 AM</span>
+</div>
+<p class="font-body-md text-caption text-on-surface-variant mt-1">Coop A1 temperature exceeded threshold. Check ventilation. / تجاوزت حرارة عنبر أ1 الحد المسموح.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<div class="fixed bottom-24 right-4 z-40">
+<button class="bg-[#FF6F00] text-white flex items-center gap-2 px-6 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-150 active:scale-90 font-label-bilingual">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Créer un poulailler / إنشاء عنبر</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-2 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] z-50 rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 transition-transform duration-150 active:scale-90 hover:text-[#FF6F00] dark:hover:text-orange-400">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Home / الرئيسية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#1B5E20] dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-lg py-1 px-3 transition-transform duration-150 active:scale-90">
+<span class="material-symbols-outlined" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Lots / المجموعات</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 transition-transform duration-150 active:scale-90 hover:text-[#FF6F00] dark:hover:text-orange-400">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Stats / إحصائيات</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 transition-transform duration-150 active:scale-90 hover:text-[#FF6F00] dark:hover:text-orange-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Profile / الحساب</span>
+</div>
+</nav>
+</body></html>

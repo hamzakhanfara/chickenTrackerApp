@@ -1,0 +1,23 @@
+{
+  "welcome": "Bienvenue",
+  "auth": {
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "loginButton": "Se connecter",
+    "registerButton": "S'inscrire",
+    "haveAccount": "Vous avez déjà un compte? Se connecter",
+    "noAccount": "Pas encore de compte? S'inscrire",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "enterPhone": "Entrez votre numéro de téléphone",
+    "sendCode": "Envoyer le code",
+    "enterOtp": "Entrez le code reçu",
+    "resendCode": "Renvoyer le code",
+    "setupPin": "Créez votre code PIN",
+    "confirmPin": "Confirmez votre code PIN",
+    "pinMismatch": "Les codes PIN ne correspondent pas",
+    "invalidOtp": "Code incorrect ou expiré"
+  }
+}

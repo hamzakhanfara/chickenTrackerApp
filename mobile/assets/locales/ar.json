@@ -1,0 +1,23 @@
+{
+  "welcome": "مرحبا",
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "email": "عنوان البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "loginButton": "تسجيل الدخول",
+    "registerButton": "إنشاء حساب",
+    "haveAccount": "هل لديك حساب بالفعل؟ تسجيل الدخول",
+    "noAccount": "ليس لديك حساب؟ إنشاء حساب",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "enterPhone": "أدخل رقم هاتفك",
+    "sendCode": "إرسال الرمز",
+    "enterOtp": "أدخل الرمز المستقبل",
+    "resendCode": "إعادة إرسال الرمز",
+    "setupPin": "إنشاء رمز PIN الخاص بك",
+    "confirmPin": "تأكيد رمز PIN الخاص بك",
+    "pinMismatch": "رموز PIN غير متطابقة",
+    "invalidOtp": "رمز غير صحيح أو منتهي الصلاحية"
+  }
+}

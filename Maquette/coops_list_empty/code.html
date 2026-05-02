@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c0c9bb",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e4db",
+                        "surface-container": "#ecefe6",
+                        "surface-bright": "#f7fbf1",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#7a2949",
+                        "primary-fixed": "#acf4a4",
+                        "inverse-on-surface": "#eff2e9",
+                        "secondary-fixed": "#ffdbcb",
+                        "on-background": "#191d17",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-dim": "#d8dbd2",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d322c",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#41493e",
+                        "secondary-fixed-dim": "#ffb691",
+                        "secondary-container": "#fb6d00",
+                        "on-tertiary-fixed": "#3e001d",
+                        "on-secondary-fixed-variant": "#793100",
+                        "surface-container-high": "#e6e9e0",
+                        "on-tertiary-container": "#ffaec6",
+                        "surface-tint": "#2a6b2c",
+                        "inverse-primary": "#91d78a",
+                        "primary": "#00450d",
+                        "tertiary": "#6b1d3d",
+                        "outline": "#717a6d",
+                        "tertiary-fixed-dim": "#ffb1c8",
+                        "surface-container-low": "#f2f5ec",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e4db",
+                        "background": "#f7fbf1",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191d17",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-secondary-fixed": "#341100",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-container": "#883454",
+                        "surface": "#f7fbf1",
+                        "secondary": "#9e4200",
+                        "on-secondary-container": "#562100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-bilingual": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Work Sans"],
+                        "caption": ["Work Sans"],
+                        "headline-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "label-bilingual": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7fbf1;
+            font-family: 'Work Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-4 h-16 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 shadow-sm z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img alt="Farm Logo" class="w-full h-full object-cover" data-alt="A professional circular logo for an agricultural company featuring a stylized green tractor and golden wheat stalks. The design is minimalist and modern, set against a clean white background with deep forest green accents. The lighting is even and bright, evoking a sense of growth, reliability, and modern farming excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjBB4o-f3pKNOCbtkfMMX1ZXek0l6QHcqWTDnfehjZ7VQrz4GQOjaOMtJrhPw64m8AFy87kSNF5LCSdslwv4fGGuhIf2xvYozPZQsrrhvU-O-MrPpbLAZbN6u951VrNa5pJI0PQ7CkqqeU6tKYr608yhqX-RkH5saMQ3adDFlqJ4pJtukkvQ0QG0zzF6S02DY9IyZQ2oLPgrmh7CphTl3lxhUkI4yVXRYFtvsmIjp2ILnePJ9myW7w_3D1RV2KUPA5gRXJVAuhnHs"/>
+</div>
+<h1 class="text-xl font-bold text-[#1B5E20] dark:text-green-50 font-['Work_Sans']">Farm Alpha / مزرعة ألفا</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200 active:opacity-70">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-4 py-8 max-w-4xl mx-auto w-full">
+<!-- Screen Title -->
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary">Poulaillers / العنابر</h2>
+<div class="h-1 w-12 bg-secondary-container mt-1 rounded-full"></div>
+</div>
+<!-- Empty State Container -->
+<div class="bg-white dark:bg-gray-900 rounded-xl border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-10 flex flex-col items-center text-center">
+<div class="w-64 h-64 mb-6">
+<img alt="Empty state illustration" class="w-full h-full object-contain opacity-80" data-alt="A beautiful, minimalist digital illustration of an empty, sun-drenched poultry farm yard. The scene features clean architectural lines of modern chicken coops in the background, stylized in soft shades of white and deep green. Gentle, warm sunlight casts soft shadows across a well-maintained yard. The aesthetic is modern corporate agriculture, clean, quiet, and hopeful, waiting for new activity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnadF89Bmc757jYp-l11_e0wOcW_r1ALmUeosJbc4puUHcU_6lFvCUNgOW8YWs1BqxNZB4cvGdooCapdPKbGdrsCAA8p5LaXwbCGQ8IG5By75qtTuiHCBWiaSeHRDbEpEV2VV1K0z_8Fucy-tb8gQG1l7CYNxO7pr9UBZBxw3i7eBj2SRtWs_K2wSASnK1JW1ID5-bBbrwiiH2FgREl0mIYPXFEy_ae07E-ORdECk7roI0UdSU_sskEy-VgY6BjtET6EXv_fSfpm0"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Aucun poulailler pour cette ferme / لا توجد عنابر لهذه المزرعة</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-md">Commencez par ajouter votre premier poulailler pour suivre la production et la santé de votre élevage.</p>
+<button class="h-14 px-8 bg-[#1B5E20] text-white rounded-lg flex items-center justify-center gap-3 shadow-lg transition-transform duration-150 active:scale-95">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-bilingual text-label-bilingual">Créer un poulailler / إنشاء عنبر</span>
+</button>
+</div>
+<!-- Secondary Info Card -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30 flex items-start gap-4">
+<div class="p-3 bg-white rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-secondary">info</span>
+</div>
+<div>
+<h4 class="font-label-bilingual text-label-bilingual text-on-surface">Guide de démarrage / دليل البدء</h4>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Apprenez à configurer vos lots et capteurs pour une gestion optimale.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30 flex items-start gap-4">
+<div class="p-3 bg-white rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary-container">support_agent</span>
+</div>
+<div>
+<h4 class="font-label-bilingual text-label-bilingual text-on-surface">Support Technique / الدعم الفني</h4>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Besoin d'aide ? Notre équipe est disponible pour vous accompagner.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-2 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 hover:text-[#FF6F00] dark:hover:text-orange-400 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Home / الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1B5E20] dark:text-green-400 bg-green-50 dark:bg-green-900/30 rounded-lg py-1 px-3 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Lots / المجموعات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 hover:text-[#FF6F00] dark:hover:text-orange-400 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Stats / إحصائيات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 py-1 px-3 hover:text-[#FF6F00] dark:hover:text-orange-400 scale-95 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Work_Sans'] text-[10px] font-medium leading-tight text-center">Profile / الحساب</span>
+</a>
+</nav>
+<!-- Spacer for fixed BottomNavBar -->
+<div class="h-24"></div>
+</body></html>
