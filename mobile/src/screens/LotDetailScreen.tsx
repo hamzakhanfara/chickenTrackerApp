@@ -52,17 +52,92 @@ const dateLabel = (isoDate: string): string => {
   });
 };
 
+const moneyLabel = (value: number): string =>
+  `${value.toLocaleString("fr-FR", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  })} DH`;
+
 export const LotDetailScreen = observer(({ route, navigation }: Props) => {
   const { lotId, lotCode, coopId } = route.params;
-  const { lotStore, dailyEntryStore } = rootStore;
+  const { lotStore, dailyEntryStore, lotExpenseStore } = rootStore;
 
   useEffect(() => {
     void lotStore.fetchLotById(lotId);
     void dailyEntryStore.fetchEntriesByLot(lotId);
-  }, [dailyEntryStore, lotId, lotStore]);
+    // Use cache immediately if available, then refresh in background.
+    void lotExpenseStore.fetchLotExpenses(lotId);
+  }, [dailyEntryStore, lotExpenseStore, lotId, lotStore]);
+
+  const retryAll = () => {
+    void lotStore.fetchLotById(lotId);
+    void dailyEntryStore.fetchEntriesByLot(lotId);
+    void lotExpenseStore.fetchLotExpenses(lotId);
+  };
+
+  const expense = lotExpenseStore.expenseByLotId[lotId];
+  const fixedExpenseRows = [
+    {
+      key: "chickPrice",
+      label: "Prix poussin / سعر الكتكوت",
+      value: toNumber(expense?.chickPrice),
+    },
+    {
+      key: "vaccinationExpense",
+      label: "Vaccination / التطعيم",
+      value: toNumber(expense?.vaccinationExpense),
+    },
+    {
+      key: "coopExpense",
+      label: "Poulailler / القن",
+      value: toNumber(expense?.coopExpense),
+    },
+    {
+      key: "farmerExpense",
+      label: "Main d'œuvre / العمالة",
+      value: toNumber(expense?.farmerExpense),
+    },
+    {
+      key: "gasExpense",
+      label: "Gaz / الغاز",
+      value: toNumber(expense?.gasExpense),
+    },
+    {
+      key: "waterExpense",
+      label: "Eau / الماء",
+      value: toNumber(expense?.waterExpense),
+    },
+    {
+      key: "feedExpense",
+      label: "Aliment / العلف",
+      value: toNumber(expense?.feedExpense),
+    },
+  ].filter((row) => row.value !== null);
+
+  const additionalExpenseRows = (expense?.additionalExpenses ?? [])
+    .map((item) => ({
+      id: item.id,
+      label: item.label,
+      value: toNumber(item.amount),
+    }))
+    .filter((item) => item.value !== null);
+
+  const fixedTotal = fixedExpenseRows.reduce(
+    (sum, row) => sum + (row.value ?? 0),
+    0,
+  );
+  const additionalTotal = additionalExpenseRows.reduce(
+    (sum, row) => sum + (row.value ?? 0),
+    0,
+  );
+  const totalExpenses = fixedTotal + additionalTotal;
 
   const lot =
     lotStore.selectedItem?.id === lotId ? lotStore.selectedItem : null;
+  const estimatedGlobalTotal =
+    expense?.entryMode === "PER_CHICK" && lot && lot.initialCount > 0
+      ? totalExpenses * lot.initialCount
+      : null;
   const entries = dailyEntryStore.entriesByLot[lotId] ?? [];
   const latestEntry = entries[0] ?? null;
 
@@ -135,13 +210,7 @@ export const LotDetailScreen = observer(({ route, navigation }: Props) => {
     return (
       <View style={s.center}>
         <Text style={s.errorText}>{lotStore.error ?? "Lot indisponible"}</Text>
-        <TouchableOpacity
-          style={s.retryBtn}
-          onPress={() => {
-            void lotStore.fetchLotById(lotId);
-            void dailyEntryStore.fetchEntriesByLot(lotId);
-          }}
-        >
+        <TouchableOpacity style={s.retryBtn} onPress={retryAll}>
           <Text style={s.retryText}>Réessayer</Text>
         </TouchableOpacity>
       </View>
@@ -252,6 +321,100 @@ export const LotDetailScreen = observer(({ route, navigation }: Props) => {
           <Text style={s.alertDesc}>
             Keep daily records updated to improve KPI reliability.
           </Text>
+        </View>
+
+        <View style={s.expensesCard}>
+          <View style={s.expensesHeaderRow}>
+            <Text style={s.expensesTitle}>Dépenses / المصاريف</Text>
+            {expense && (
+              <View style={s.modeChip}>
+                <Text style={s.modeChipText}>
+                  {expense.entryMode === "PER_CHICK" ? "Par poussin" : "Total"}
+                </Text>
+              </View>
+            )}
+          </View>
+
+          {lotExpenseStore.isLoading && !expense ? (
+            <View>
+              <View style={[s.expenseSkeleton, { width: "65%" }]} />
+              <View style={[s.expenseSkeleton, { width: "85%" }]} />
+              <View style={[s.expenseSkeleton, { width: "55%" }]} />
+            </View>
+          ) : lotExpenseStore.error ? (
+            <View style={s.expenseErrorBox}>
+              <Text style={s.expenseErrorText}>{lotExpenseStore.error}</Text>
+              <TouchableOpacity
+                style={s.expenseRetryBtn}
+                onPress={() => {
+                  void lotExpenseStore.fetchLotExpenses(lotId);
+                }}
+              >
+                <Text style={s.expenseRetryText}>Réessayer</Text>
+              </TouchableOpacity>
+            </View>
+          ) : !expense ? (
+            <View style={s.expenseEmptyBox}>
+              <Text style={s.expenseEmptyText}>Aucune dépense enregistrée</Text>
+              <TouchableOpacity
+                style={s.expenseAddBtn}
+                onPress={() =>
+                  navigation.navigate("CreateDailyEntry", {
+                    lotId: lot.id,
+                    lotCode: lot.code,
+                  })
+                }
+              >
+                <Text style={s.expenseAddBtnText}>Ajouter des dépenses</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View>
+              {fixedExpenseRows.length > 0 && (
+                <View style={s.expenseSection}>
+                  {fixedExpenseRows.map((item) => (
+                    <View style={s.expenseRow} key={item.key}>
+                      <Text style={s.expenseLabel}>{item.label}</Text>
+                      <Text style={s.expenseValue}>
+                        {moneyLabel(item.value ?? 0)}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+
+              {additionalExpenseRows.length > 0 && (
+                <View style={[s.expenseSection, s.expenseSectionTopBorder]}>
+                  <Text style={s.expenseSubTitle}>Supplémentaires</Text>
+                  {additionalExpenseRows.map((item) => (
+                    <View style={s.expenseRow} key={item.id}>
+                      <Text style={s.expenseLabel}>{item.label}</Text>
+                      <Text style={s.expenseValue}>
+                        {moneyLabel(item.value ?? 0)}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+
+              <View style={[s.expenseSection, s.expenseSectionTopBorder]}>
+                <View style={s.expenseRow}>
+                  <Text style={s.totalLabel}>Total Expenses</Text>
+                  <Text style={s.totalValue}>{moneyLabel(totalExpenses)}</Text>
+                </View>
+                {estimatedGlobalTotal !== null && (
+                  <View style={s.expenseRow}>
+                    <Text style={s.totalSubLabel}>
+                      Estimé global ({lot.initialCount} oiseaux)
+                    </Text>
+                    <Text style={s.totalSubValue}>
+                      {moneyLabel(estimatedGlobalTotal)}
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </View>
+          )}
         </View>
 
         {!isClosed ? (
@@ -452,6 +615,101 @@ const s = StyleSheet.create({
   },
   alertTitle: { fontSize: 14, fontWeight: "700", color: C.text },
   alertDesc: { marginTop: 4, fontSize: 12, color: C.muted },
+  expensesCard: {
+    marginTop: 12,
+    backgroundColor: C.card,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#F0F0F0",
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+    padding: 14,
+  },
+  expensesHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  expensesTitle: { fontSize: 15, fontWeight: "700", color: C.primary },
+  modeChip: {
+    backgroundColor: "#E8F5E9",
+    borderRadius: 999,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  modeChipText: { color: C.primary, fontSize: 11, fontWeight: "700" },
+  expenseSkeleton: {
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: "#E5E7EB",
+    marginTop: 10,
+  },
+  expenseErrorBox: {
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#FCA5A5",
+    backgroundColor: "#FEE2E2",
+    padding: 10,
+  },
+  expenseErrorText: { color: "#991B1B", fontSize: 12, marginBottom: 8 },
+  expenseRetryBtn: {
+    alignSelf: "flex-start",
+    minHeight: 34,
+    borderRadius: 8,
+    backgroundColor: C.primary,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+  expenseRetryText: { color: "#fff", fontWeight: "700", fontSize: 12 },
+  expenseEmptyBox: {
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: C.border,
+    backgroundColor: "#FAFAFA",
+    padding: 10,
+  },
+  expenseEmptyText: { color: C.muted, fontSize: 12, marginBottom: 8 },
+  expenseAddBtn: {
+    alignSelf: "flex-start",
+    minHeight: 34,
+    borderRadius: 8,
+    backgroundColor: C.action,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+  expenseAddBtnText: { color: "#fff", fontWeight: "700", fontSize: 12 },
+  expenseSection: { marginTop: 4 },
+  expenseSectionTopBorder: {
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#F3F4F6",
+  },
+  expenseSubTitle: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: C.text,
+    marginBottom: 6,
+  },
+  expenseRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 6,
+    gap: 10,
+  },
+  expenseLabel: { flex: 1, color: C.text, fontSize: 12 },
+  expenseValue: { color: C.text, fontSize: 12, fontWeight: "700" },
+  totalLabel: { flex: 1, color: C.primary, fontSize: 13, fontWeight: "800" },
+  totalValue: { color: C.primary, fontSize: 14, fontWeight: "800" },
+  totalSubLabel: { flex: 1, color: C.muted, fontSize: 11, fontWeight: "600" },
+  totalSubValue: { color: C.text, fontSize: 12, fontWeight: "700" },
   primaryBtn: {
     marginTop: 12,
     minHeight: 52,
