@@ -3,6 +3,7 @@ import { authMiddleware } from "../middleware/auth";
 import * as lotsController from "../controllers/lots.controller";
 import dailyEntriesRouter from "./dailyEntries";
 import lotExpensesRouter from "./lotExpenses.routes";
+import { lotTasksRouter } from "./tasks.routes";
 
 // mergeParams so parent coopId is available when nested under /coops/:coopId/lots
 const router = Router({ mergeParams: true });
@@ -18,6 +19,8 @@ router.use("/:lotId/daily-entries", dailyEntriesRouter);
 
 // Nested expenses: /lots/:lotId/expenses
 router.use("/:lotId/expenses", lotExpensesRouter);
+// Nested tasks: /lots/:lotId/tasks
+router.use("/:lotId/tasks", lotTasksRouter);
 
 // Single lot access
 router.get("/:lotId", lotsController.getOne);

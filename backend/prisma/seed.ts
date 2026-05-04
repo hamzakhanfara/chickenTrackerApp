@@ -43,6 +43,63 @@ async function main() {
   });
   console.log(`Coop: ${coop.id} (${coop.name})`);
 
+  // Task templates
+  const taskTemplates = [
+    {
+      name: "Vaccination J7",
+      description: "First vaccination at day 7.",
+      category: "vaccine",
+      defaultOffsetDays: 7,
+    },
+    {
+      name: "Vaccination J14",
+      description: "Second vaccination at day 14.",
+      category: "vaccine",
+      defaultOffsetDays: 14,
+    },
+    {
+      name: "Vaccination J21",
+      description: "Third vaccination at day 21.",
+      category: "vaccine",
+      defaultOffsetDays: 21,
+    },
+    {
+      name: "Contrôle poids",
+      description: "Weekly weight check — 30 birds.",
+      category: "control",
+      defaultOffsetDays: 7,
+    },
+    {
+      name: "Nettoyage poulailler",
+      description: "Clean and disinfect the coop.",
+      category: "control",
+      defaultOffsetDays: null,
+    },
+    {
+      name: "Stock aliment",
+      description: "Check feed stock, reorder if low.",
+      category: "feeding",
+      defaultOffsetDays: null,
+    },
+    {
+      name: "Traitement préventif",
+      description: "Preventive treatment per schedule.",
+      category: "treatment",
+      defaultOffsetDays: null,
+    },
+  ];
+  for (const tpl of taskTemplates) {
+    const existing = await prisma.taskTemplate.findFirst({
+      where: { name: tpl.name },
+    });
+    if (!existing) {
+      await prisma.taskTemplate.create({
+        data: { ...tpl, isActive: true },
+      });
+    }
+  }
+  console.log(`Task templates: ${taskTemplates.length} upserted.`);
+
   console.log("Seed complete.");
 }
 

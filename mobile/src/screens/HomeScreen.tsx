@@ -15,7 +15,7 @@ import { rootStore } from "../stores/RootStore";
 import type { AppStackParamList } from "../navigation/AppNavigator";
 import { coopsApi } from "../services/coops.api";
 import { lotsApi } from "../services/lots.api";
-import { ApiServiceError, Lot } from "../services/types";
+import { ApiServiceError, Lot, OperationalAlert } from "../services/types";
 
 // ─── Design Tokens ────────────────────────────────────────────────────────────
 
@@ -159,11 +159,12 @@ const IcCard = ({
 export const HomeScreen = observer(() => {
   const { t } = useTranslation();
   const navigation = useNavigation<HomeNavProp>();
-  const { authStore, farmStore } = rootStore;
+  const { authStore, farmStore, alertStore } = rootStore;
   const [selectedFarmId, setSelectedFarmId] = useState<string | null>(null);
   const [lots, setLots] = useState<Lot[]>([]);
   const [lotsLoading, setLotsLoading] = useState(false);
   const [lotsError, setLotsError] = useState<string | null>(null);
+  const [showAllAlerts, setShowAllAlerts] = useState(false);
   const [activeTab, setActiveTab] = useState<
     "home" | "lots" | "calendar" | "reports"
   >("home");
@@ -179,27 +180,12 @@ export const HomeScreen = observer(() => {
   const topLotCode = activeLots[0]?.code ?? null;
   const displayName = (authStore.email || "Farmer").split("@")[0];
 
-  const alertItems = useMemo(
-    () => [
-      {
-        id: "a1",
-        icon: "🌡️",
-        title: "Temp Alert / تنبيه حرارة",
-        desc: "House 03: Temperature exceeds 32°C. Chec...",
-        time: "10:45 AM",
-        color: "#D32F2F",
-      },
-      {
-        id: "a2",
-        icon: "💧",
-        title: "Consumption / استهلاك المياه",
-        desc: "Water intake stable across all active lots...",
-        time: "08:00 AM",
-        color: "#FF6F00",
-      },
-    ],
-    [],
-  );
+  const alertItems = useMemo(() => {
+    const source = showAllAlerts
+      ? alertStore.alerts
+      : alertStore.alerts.slice(0, 3);
+    return source;
+  }, [alertStore.alerts, showAllAlerts]);
 
   useEffect(() => {
     if (!authStore.accessToken) return;
@@ -237,6 +223,27 @@ export const HomeScreen = observer(() => {
     };
     void load();
   }, [selectedFarmId]);
+
+  useEffect(() => {
+    if (!authStore.accessToken) return;
+    void alertStore.fetchAlerts({
+      farmId: selectedFarmId ?? undefined,
+      limit: showAllAlerts ? 30 : 3,
+    });
+    void alertStore.refreshUnreadCount();
+  }, [alertStore, authStore.accessToken, selectedFarmId, showAllAlerts]);
+
+  const severityColor = (severity: OperationalAlert["severity"]) => {
+    if (severity === "CRITICAL") return "#D32F2F";
+    if (severity === "WARNING") return "#FF6F00";
+    return "#1B5E20";
+  };
+
+  const alertIcon = (type: OperationalAlert["type"]) => {
+    if (type === "HIGH_MORTALITY") return "☠️";
+    if (type === "MISSING_DAILY_ENTRY") return "📝";
+    return "📅";
+  };
 
   const showPlaceholder = () =>
     Alert.alert(
@@ -375,6 +382,22 @@ export const HomeScreen = observer(() => {
           <Text style={s.ctaText}>Add daily entry / إضافة إدخال يومي</Text>
         </TouchableOpacity>
 
+        {/* Calendar CTA */}
+        <TouchableOpacity
+          style={[s.ctaBtn, { backgroundColor: "#1B5E20", marginTop: 10 }]}
+          onPress={() => {
+            const farm = farmStore.items.find((f) => f.id === selectedFarmId);
+            navigation.navigate("Calendar", {
+              farmId: selectedFarmId ?? "",
+              farmName: farm?.name,
+            });
+          }}
+          activeOpacity={0.85}
+        >
+          <Text style={s.ctaPlus}>📅</Text>
+          <Text style={s.ctaText}>Calendrier des tâches / تقويم المهام</Text>
+        </TouchableOpacity>
+
         {/* KPI cards */}
         <KpiRow activeLots={activeLots.length} liveBirds={liveBirds} />
 
@@ -386,32 +409,64 @@ export const HomeScreen = observer(() => {
 
         {/* Alerts & Status */}
         <View style={s.alertsHeader}>
-          <Text style={s.alertsTitle}>Alerts & Status / تنبيهات</Text>
-          <TouchableOpacity onPress={showPlaceholder}>
-            <Text style={s.viewAll}>View all</Text>
+          <Text style={s.alertsTitle}>
+            Alerts & Status / تنبيهات{" "}
+            {alertStore.unreadCount > 0 ? `(${alertStore.unreadCount})` : ""}
+          </Text>
+          <TouchableOpacity onPress={() => setShowAllAlerts((value) => !value)}>
+            <Text style={s.viewAll}>
+              {showAllAlerts ? "Voir moins" : "View all"}
+            </Text>
           </TouchableOpacity>
         </View>
-        {alertItems.map((a) => (
-          <TouchableOpacity
-            key={a.id}
-            style={s.alertCard}
-            onPress={showPlaceholder}
-            activeOpacity={0.8}
-          >
-            <View style={[s.alertIconBox, { backgroundColor: a.color + "18" }]}>
-              <Text style={{ fontSize: 20 }}>{a.icon}</Text>
-            </View>
-            <View style={s.alertBody}>
-              <Text style={s.alertTitle} numberOfLines={1}>
-                {a.title}
+        {alertStore.isLoading ? (
+          <Text style={{ color: C.muted, marginBottom: 8 }}>
+            Chargement des alertes...
+          </Text>
+        ) : alertStore.error ? (
+          <Text style={{ color: C.danger, marginBottom: 8 }}>
+            {alertStore.error}
+          </Text>
+        ) : alertItems.length === 0 ? (
+          <View style={s.alertCard}>
+            <Text style={s.alertTitle}>Aucune alerte opérationnelle</Text>
+            <Text style={s.alertDesc}>Tout semble normal pour le moment.</Text>
+          </View>
+        ) : (
+          alertItems.map((a) => (
+            <TouchableOpacity
+              key={a.id}
+              style={s.alertCard}
+              onPress={() => {
+                void alertStore.markRead(a.id);
+              }}
+              activeOpacity={0.8}
+            >
+              <View
+                style={[
+                  s.alertIconBox,
+                  { backgroundColor: severityColor(a.severity) + "18" },
+                ]}
+              >
+                <Text style={{ fontSize: 20 }}>{alertIcon(a.type)}</Text>
+              </View>
+              <View style={s.alertBody}>
+                <Text style={s.alertTitle} numberOfLines={1}>
+                  {a.title}
+                </Text>
+                <Text style={s.alertDesc} numberOfLines={1}>
+                  {a.message}
+                </Text>
+              </View>
+              <Text style={s.alertTime}>
+                {new Date(a.createdAt).toLocaleTimeString("fr-FR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </Text>
-              <Text style={s.alertDesc} numberOfLines={1}>
-                {a.desc}
-              </Text>
-            </View>
-            <Text style={s.alertTime}>{a.time}</Text>
-          </TouchableOpacity>
-        ))}
+            </TouchableOpacity>
+          ))
+        )}
 
         <View style={{ height: 24 }} />
       </ScrollView>
@@ -440,6 +495,27 @@ export const HomeScreen = observer(() => {
                   farmId: selectedFarmId,
                   farmName: farm?.name,
                 });
+              } else if (tab.id === "calendar") {
+                const farm = farmStore.items.find(
+                  (f) => f.id === selectedFarmId,
+                );
+                navigation.navigate("Calendar", {
+                  farmId: selectedFarmId ?? "",
+                  farmName: farm?.name,
+                });
+              } else if (tab.id === "reports") {
+                const farm = farmStore.items.find(
+                  (f) => f.id === selectedFarmId,
+                );
+                navigation.navigate("Reports", {
+                  farmId: selectedFarmId ?? undefined,
+                  lotId: activeLots[0]?.id,
+                  lotCode: activeLots[0]?.code,
+                });
+                void alertStore.refreshUnreadCount();
+                if (farm?.name) {
+                  setActiveTab("reports");
+                }
               } else {
                 showPlaceholder();
               }

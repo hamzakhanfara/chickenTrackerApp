@@ -11,6 +11,7 @@ import { observer } from "mobx-react-lite";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppStackParamList } from "../navigation/AppNavigator";
 import { rootStore } from "../stores/RootStore";
+import type { OperationalAlert } from "../services/types";
 
 type Props = NativeStackScreenProps<AppStackParamList, "LotDetail">;
 
@@ -60,20 +61,30 @@ const moneyLabel = (value: number): string =>
 
 export const LotDetailScreen = observer(({ route, navigation }: Props) => {
   const { lotId, lotCode, coopId } = route.params;
-  const { lotStore, dailyEntryStore, lotExpenseStore } = rootStore;
+  const { lotStore, dailyEntryStore, lotExpenseStore, alertStore } = rootStore;
 
   useEffect(() => {
     void lotStore.fetchLotById(lotId);
     void dailyEntryStore.fetchEntriesByLot(lotId);
     // Use cache immediately if available, then refresh in background.
     void lotExpenseStore.fetchLotExpenses(lotId);
-  }, [dailyEntryStore, lotExpenseStore, lotId, lotStore]);
+    void alertStore.fetchAlerts({ lotId, limit: 5 });
+  }, [alertStore, dailyEntryStore, lotExpenseStore, lotId, lotStore]);
 
   const retryAll = () => {
     void lotStore.fetchLotById(lotId);
     void dailyEntryStore.fetchEntriesByLot(lotId);
     void lotExpenseStore.fetchLotExpenses(lotId);
+    void alertStore.fetchAlerts({ lotId, limit: 5 });
   };
+
+  const severityColor = (severity: OperationalAlert["severity"]) => {
+    if (severity === "CRITICAL") return "#D32F2F";
+    if (severity === "WARNING") return "#FF6F00";
+    return C.primary;
+  };
+
+  const alertsForLot = alertStore.alerts.filter((item) => item.lotId === lotId);
 
   const expense = lotExpenseStore.expenseByLotId[lotId];
   const fixedExpenseRows = [
@@ -317,10 +328,50 @@ export const LotDetailScreen = observer(({ route, navigation }: Props) => {
         </View>
 
         <View style={s.alertCard}>
-          <Text style={s.alertTitle}>Reminder / تذكير</Text>
-          <Text style={s.alertDesc}>
-            Keep daily records updated to improve KPI reliability.
-          </Text>
+          <Text style={s.alertTitle}>Lot Alerts / تنبيهات الدفعة</Text>
+          {alertStore.isLoading ? (
+            <Text style={s.alertDesc}>Chargement des alertes...</Text>
+          ) : alertStore.error ? (
+            <Text style={[s.alertDesc, { color: C.danger }]}>
+              {alertStore.error}
+            </Text>
+          ) : alertsForLot.length === 0 ? (
+            <Text style={s.alertDesc}>Aucune alerte pour ce lot.</Text>
+          ) : (
+            alertsForLot.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                style={[
+                  s.historyItem,
+                  {
+                    marginTop: 10,
+                    borderLeftWidth: 3,
+                    borderLeftColor: severityColor(item.severity),
+                  },
+                ]}
+                onPress={() => {
+                  void alertStore.markRead(item.id);
+                }}
+                activeOpacity={0.8}
+              >
+                <View style={{ flex: 1 }}>
+                  <Text style={s.historyText}>{item.title}</Text>
+                  <Text style={s.historySub}>{item.message}</Text>
+                </View>
+                {!item.isRead && (
+                  <Text
+                    style={{
+                      color: C.primary,
+                      fontWeight: "700",
+                      fontSize: 11,
+                    }}
+                  >
+                    NEW
+                  </Text>
+                )}
+              </TouchableOpacity>
+            ))
+          )}
         </View>
 
         <View style={s.expensesCard}>
@@ -448,7 +499,34 @@ export const LotDetailScreen = observer(({ route, navigation }: Props) => {
           </TouchableOpacity>
         )}
 
-        <TouchableOpacity style={s.secondaryBtn}>
+        <TouchableOpacity
+          style={[
+            s.secondaryBtn,
+            { backgroundColor: "#E8F5E9", borderColor: C.primary },
+          ]}
+          onPress={() =>
+            navigation.navigate("AddTask", {
+              farmId: route.params.farmId,
+              lotId: lot.id,
+              lotCode: lot.code,
+            })
+          }
+        >
+          <Text style={[s.secondaryBtnText, { color: C.primary }]}>
+            📅 Tâches calendrier / مهام التقويم
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={s.secondaryBtn}
+          onPress={() =>
+            navigation.navigate("Reports", {
+              farmId: route.params.farmId,
+              lotId: lot.id,
+              lotCode: lot.code,
+            })
+          }
+        >
           <Text style={s.secondaryBtnText}>
             📄 Generate Report / إصدار تقرير
           </Text>

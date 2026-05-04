@@ -161,6 +161,138 @@ export interface UpsertLotExpenseDto {
   additionalExpenses?: { label: string; amount: number }[];
 }
 
+// ── Calendar Tasks ────────────────────────────────────────────────────────────
+
+export type TaskStatus = "PENDING" | "DONE" | "CANCELED";
+export type TaskPriority = "LOW" | "MEDIUM" | "HIGH";
+
+export interface TaskTemplate {
+  id: string;
+  name: string;
+  description: string | null;
+  defaultOffsetDays: number | null;
+  category: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CalendarTask {
+  id: string;
+  lotId: string;
+  templateId: string | null;
+  title: string;
+  description: string | null;
+  scheduledDate: string;
+  status: TaskStatus;
+  priority: TaskPriority | null;
+  completedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  template?: TaskTemplate | null;
+  lot?: { id: string; code: string };
+}
+
+export interface CreateTaskDto {
+  templateId?: string;
+  title?: string;
+  description?: string;
+  scheduledDate: string;
+  priority?: TaskPriority;
+}
+
+export interface UpdateTaskStatusDto {
+  status: TaskStatus;
+}
+
+// ── Alerts ──────────────────────────────────────────────────────────────────
+
+export type AlertType = "TASK_DUE" | "MISSING_DAILY_ENTRY" | "HIGH_MORTALITY";
+export type AlertSeverity = "INFO" | "WARNING" | "CRITICAL";
+
+export interface OperationalAlert {
+  id: string;
+  userId: string;
+  farmId: string | null;
+  coopId: string | null;
+  lotId: string | null;
+  type: AlertType;
+  severity: AlertSeverity;
+  title: string;
+  message: string;
+  metadata: Record<string, unknown> | null;
+  entityKey: string;
+  alertDate: string;
+  isRead: boolean;
+  createdAt: string;
+  lot?: { id: string; code: string } | null;
+}
+
+// ── Reports ─────────────────────────────────────────────────────────────────
+
+export type MetricZone = "good" | "watch" | "critical" | "unavailable";
+export type MetricTrend = "improving" | "stable" | "worsening" | "unavailable";
+
+export interface ReportMetric {
+  key: string;
+  label: string;
+  value: number | null;
+  unit: string;
+  zone: MetricZone;
+  trend: MetricTrend;
+  formula: string;
+  available: boolean;
+  context?: string;
+}
+
+export interface ReportTip {
+  id: string;
+  severity: "INFO" | "WARNING" | "CRITICAL";
+  title: string;
+  description: string;
+  recommendedActions: string[];
+}
+
+export interface LotReportSummary {
+  scope: "lot";
+  lot: {
+    id: string;
+    code: string;
+    status: LotStatus;
+    farmId: string;
+    coopId: string;
+    initialBirdCount: number;
+    survivingBirds: number;
+    totalMortality: number;
+  };
+  financialSummary: {
+    totalExpenses: number;
+    feedCostSharePct: number | null;
+    costPerChick: number | null;
+    costPerSurvivingChick: number | null;
+    costPerKgLiveWeight: number | null;
+    formulas: Record<string, string>;
+    components: Record<string, number>;
+  };
+  revenueEstimator: {
+    inputs: {
+      sellPricePerKg: number;
+      projectedAvgWeightKg: number;
+      projectedSurvivingBirds: number;
+    };
+    outputs: {
+      projectedRevenue: number | null;
+      grossMargin: number | null;
+      marginRatePct: number | null;
+      breakEvenPricePerKg: number | null;
+    };
+    missingInputs: string[];
+    formulas: Record<string, string>;
+  };
+  healthMetrics: ReportMetric[];
+  optimizationTips: ReportTip[];
+}
+
 export type ApiErrorCode =
   | "validation"
   | "unauthorized"

@@ -8,6 +8,9 @@ import { CreateDailyEntryScreen } from "../screens/CreateDailyEntryScreen";
 import { LotDetailScreen } from "../screens/LotDetailScreen";
 import { SelectLotForDailyEntryScreen } from "../screens/SelectLotForDailyEntryScreen";
 import { CreateLotScreen } from "../screens/CreateLotScreen";
+import { CalendarScreen } from "../screens/CalendarScreen";
+import { AddTaskScreen } from "../screens/AddTaskScreen";
+import { ReportsScreen } from "../screens/ReportsScreen";
 
 export type AppStackParamList = {
   Home: undefined;
@@ -29,6 +32,9 @@ export type AppStackParamList = {
   };
   SelectLotForDailyEntry: { farmId: string; farmName?: string };
   CreateDailyEntry: { lotId: string; lotCode?: string };
+  Calendar: { farmId: string; farmName?: string };
+  AddTask: { farmId: string; lotId?: string; lotCode?: string };
+  Reports: { farmId?: string; lotId?: string; lotCode?: string } | undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -59,5 +65,8 @@ export const AppNavigator = () => (
       component={SelectLotForDailyEntryScreen}
     />
     <Stack.Screen name="CreateDailyEntry" component={CreateDailyEntryScreen} />
+    <Stack.Screen name="Calendar" component={CalendarScreen} />
+    <Stack.Screen name="AddTask" component={AddTaskScreen} />
+    <Stack.Screen name="Reports" component={ReportsScreen} />
   </Stack.Navigator>
 );

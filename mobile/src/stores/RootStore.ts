@@ -4,6 +4,9 @@ import { DailyEntryStore } from "./DailyEntryStore";
 import { FarmStore } from "./FarmStore";
 import { LotExpenseStore } from "./LotExpenseStore";
 import { LotStore } from "./LotStore";
+import { TaskStore } from "./TaskStore";
+import { AlertStore } from "./AlertStore";
+import { ReportStore } from "./ReportStore";
 
 export class RootStore {
   authStore: AuthStore;
@@ -12,6 +15,9 @@ export class RootStore {
   lotStore: LotStore;
   dailyEntryStore: DailyEntryStore;
   lotExpenseStore: LotExpenseStore;
+  taskStore: TaskStore;
+  alertStore: AlertStore;
+  reportStore: ReportStore;
 
   constructor() {
     this.authStore = new AuthStore();
@@ -20,6 +26,9 @@ export class RootStore {
     this.lotStore = new LotStore();
     this.dailyEntryStore = new DailyEntryStore();
     this.lotExpenseStore = new LotExpenseStore();
+    this.taskStore = new TaskStore();
+    this.alertStore = new AlertStore();
+    this.reportStore = new ReportStore();
   }
 }
 
